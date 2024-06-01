@@ -14,8 +14,9 @@ Editor_Window_Renderer::~Editor_Window_Renderer()
 void Editor_Window_Renderer::init(const EditorWindow& window)
 {
     SDL_Init(SDL_INIT_VIDEO);
-    this->window = SDL_CreateWindow(window.getTitle().c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window.getWidth(), window.getHeight(), SDL_WINDOW_SHOWN);
+    this->window = SDL_CreateWindow(window.getTitle().c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, window.getWidth(), window.getHeight(), SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
     renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_SetWindowMinimumSize(this->window, window.getMinimumWidth(), window.getMinimumHeight());
 }
 
 void Editor_Window_Renderer::clear()

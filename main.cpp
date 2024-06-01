@@ -15,19 +15,20 @@ int CALLBACK WinMain(
     EditorWindow& window = EditorWindow::getInstance();
     window.setTitle("Game");
     window.setSize(800, 600);
+    window.setMinimumSize(400, 300);
 
-    Editor_Window_Renderer renderer;
-    renderer.init(window);
+    Editor_Window_Renderer editor_window_renderer;
+    editor_window_renderer.init(window);
 
-    Editor_Window_Controller controller(renderer);
+    Editor_Window_Controller editor_window_controller(editor_window_renderer);
 
     while (true)
     {
-        controller.handleEvents();
+        editor_window_controller.handleEvents();
 
-        renderer.clear();
+        editor_window_renderer.clear();
         // Draw stuff
-        renderer.present();
+        editor_window_renderer.present();
     }
     return 0;
 }

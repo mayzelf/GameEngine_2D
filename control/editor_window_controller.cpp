@@ -8,6 +8,10 @@ void Editor_Window_Controller::handleEvents() {
         if (event.type == SDL_QUIT) {
             exit(0);
         }
-        // Handle other events...
+        else if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) {
+            EditorWindow& window = EditorWindow::getInstance();
+            window.resize(event.window.data1, event.window.data2);
+        }
+        
     }
 }
