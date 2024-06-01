@@ -1,6 +1,6 @@
 #include "title_bar.h"
 
-TitleBar::TitleBar(const std::string& iconPath, int flags, const std::vector<Dropdown>& dropdowns, const std::string& title)
+TitleBar::TitleBar(const int& iconPath, int flags, const std::vector<Dropdown>& dropdowns, const std::string& title)
 {
 	m_iconPath = iconPath;
 	m_title = title;
@@ -11,7 +11,7 @@ TitleBar::TitleBar(const std::string& iconPath, int flags, const std::vector<Dro
 }
 
 // Setters
-void TitleBar::setIconPath(const std::string& iconPath)
+void TitleBar::setIconPath(const int& iconPath)
 {
     m_iconPath = iconPath;
 }

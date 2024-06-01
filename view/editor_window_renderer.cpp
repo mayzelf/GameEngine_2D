@@ -1,6 +1,6 @@
 #include "editor_window_renderer.h"
 
-Editor_Window_Renderer::Editor_Window_Renderer(EditorWindow& window) : window(nullptr), editorWindow(window)
+Editor_Window_Renderer::Editor_Window_Renderer(EditorWindow& window, HINSTANCE hInstance) : window(nullptr), editorWindow(window), hInstance(hInstance)
 {
 }
 
@@ -67,10 +67,14 @@ void Editor_Window_Renderer::present()
         {
             if (!editorWindow.getTitleBar().getIconPath().empty())
             {
-                //ImGui::Image((void*)(intptr_t)editorWindow.getTitleBar().getIconPath().c_str(), ImVec2(20, 20));
-				ImGui::SameLine();
+                GLuint texture = utils::resources::loadTextureFromResource(hInstance, IDB_PNG1);
+                if (texture == 0)
+            	{
+                    ImGui::Text("Failed");
+                }
+            	ImGui::Image((void*)(intptr_t)texture, ImVec2(20, 20));
+                ImGui::SameLine();
                 ImGui::Text(editorWindow.getTitleBar().getTitle().c_str());
-			
             }
         }
     }

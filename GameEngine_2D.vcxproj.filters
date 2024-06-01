@@ -383,9 +383,24 @@
     <ClInclude Include="externals\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="externals\glew-2.1.0\include\GL\eglew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\glew-2.1.0\include\GL\glew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\glew-2.1.0\include\GL\glxew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\glew-2.1.0\include\GL\wglew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="ressources\favicon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ressources\Maygine.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -393,5 +408,9 @@
     <ResourceCompile Include="GameEngine_2D.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="externals\glew-2.1.0\lib\Release\x64\glew32.lib" />
+    <Library Include="externals\glew-2.1.0\lib\Release\x64\glew32s.lib" />
   </ItemGroup>
 </Project>

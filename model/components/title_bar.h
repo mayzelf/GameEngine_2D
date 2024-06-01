@@ -28,10 +28,10 @@ class TitleBar
 {
 public:
     TitleBar() = default;
-    TitleBar(const std::string& iconPath, int flags, const std::vector<Dropdown>& dropdowns = std::vector<Dropdown>(), const std::string& title = "");
+    TitleBar(const int& iconPath, int flags, const std::vector<Dropdown>& dropdowns = std::vector<Dropdown>(), const std::string& title = "");
 
     // Setters
-    void setIconPath(const std::string& iconPath);
+    void setIconPath(const int& iconPath);
     void setTitle(const std::string& title);
     void setShowMinimizeButton(bool showMinimizeButton);
     void setShowMaximizeButton(bool showMaximizeButton);
@@ -58,7 +58,7 @@ private:
 class TitleBarBuilder
 {
 public:
-    TitleBarBuilder& setIconPath(const std::string& iconPath) { m_iconPath = iconPath; return *this; }
+    TitleBarBuilder& setIconPath(const int& iconPath) { m_iconPath = iconPath; return *this; }
     TitleBarBuilder& setFlags(int flags) { m_flags = flags; return *this; }
     TitleBarBuilder& setDropdowns(const std::vector<Dropdown>& dropdowns) { m_dropdowns = dropdowns; return *this; }
     TitleBarBuilder& setTitle(const std::string& title) { m_title = title; return *this; }
@@ -66,7 +66,7 @@ public:
     TitleBar build() const { return TitleBar(m_iconPath, m_flags, m_dropdowns, m_title); }
 
 private:
-    std::string m_iconPath;
+    int m_iconPath;
     int m_flags = 0;
     std::vector<Dropdown> m_dropdowns;
     std::string m_title;
