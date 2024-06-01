@@ -1,7 +1,7 @@
 #ifndef EDITOR_WINDOW_CONTROLLER_H
 #define EDITOR_WINDOW_CONTROLLER_H
 #include "../view/editor_window_renderer.h"
-#include <SDL2/include/SDL.h>
+#include <SDL.h>
 
 class Editor_Window_Controller {
 public:

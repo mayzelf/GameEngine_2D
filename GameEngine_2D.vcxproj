@@ -93,12 +93,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;User32.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;User32.lib;opengl32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -110,6 +111,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -117,7 +119,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;User32.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;User32.lib;opengl32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,13 +129,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\include;E:\Github\GameEngine_2D\GameEngine_2D\externals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;User32.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;User32.lib;opengl32.lib</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -147,7 +149,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\include;E:\Github\GameEngine_2D\GameEngine_2D\externals;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,19 +157,37 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;User32.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;User32.lib;opengl32.lib</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="control\editor_window_controller.cpp" />
+    <ClCompile Include="externals\imgui\imgui_demo.cpp" />
+    <ClCompile Include="externals\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="externals\imgui\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="externals\imgui\imgui_impl_sdlrenderer2.cpp" />
+    <ClCompile Include="externals\imgui\imgui.cpp" />
+    <ClCompile Include="externals\imgui\imgui_draw.cpp" />
+    <ClCompile Include="externals\imgui\imgui_tables.cpp" />
+    <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="view\editor_window_renderer.cpp" />
     <ClCompile Include="model\editor_window.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="control\editor_window_controller.h" />
+    <ClInclude Include="externals\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="externals\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="externals\imgui\imgui_impl_sdl2.h" />
+    <ClInclude Include="externals\imgui\imgui_impl_sdlrenderer2.h" />
+    <ClInclude Include="externals\imgui\imconfig.h" />
+    <ClInclude Include="externals\imgui\imgui.h" />
+    <ClInclude Include="externals\imgui\imgui_internal.h" />
+    <ClInclude Include="externals\imgui\imstb_rectpack.h" />
+    <ClInclude Include="externals\imgui\imstb_textedit.h" />
+    <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="view\editor_window_renderer.h" />
     <ClInclude Include="externals\SDL2\include\begin_code.h" />
     <ClInclude Include="externals\SDL2\include\close_code.h" />
