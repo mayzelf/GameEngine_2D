@@ -173,6 +173,7 @@
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="model\components\title_bar.cpp" />
+    <ClCompile Include="utils.cpp" />
     <ClCompile Include="view\editor_window_renderer.cpp" />
     <ClCompile Include="model\editor_window.cpp" />
     <ClCompile Include="main.cpp" />
@@ -189,8 +190,10 @@
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="externals\stb_image.h" />
     <ClInclude Include="model\components\title_bar.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="view\editor_window_renderer.h" />
     <ClInclude Include="externals\SDL2\include\begin_code.h" />
     <ClInclude Include="externals\SDL2\include\close_code.h" />
