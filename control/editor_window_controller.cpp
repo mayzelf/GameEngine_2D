@@ -5,6 +5,8 @@ Editor_Window_Controller::Editor_Window_Controller(Editor_Window_Renderer& rende
 void Editor_Window_Controller::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
+        ImGui_ImplSDL2_ProcessEvent(&event);
+
         if (event.type == SDL_QUIT) {
             exit(0);
         }
@@ -12,6 +14,5 @@ void Editor_Window_Controller::handleEvents() {
             EditorWindow& window = EditorWindow::getInstance();
             window.resize(event.window.data1, event.window.data2);
         }
-        
     }
 }

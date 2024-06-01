@@ -32,6 +32,7 @@ void Editor_Window_Renderer::init()
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 
     // Setup ImGui style
     ImGui::StyleColorsDark();
@@ -52,7 +53,31 @@ void Editor_Window_Renderer::present()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
+
+
     ImGui::ShowDemoWindow();
+    ImGui::SetNextWindowPos(ImVec2(0, 0));
+    ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editorWindow.getWidth()), 30.0f));
+    
+    if(!editorWindow.getTitleBar().getIconPath().empty())
+    {
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar;
+
+        if (ImGui::Begin("editor_window_title", nullptr, window_flags))
+        {
+            if (!editorWindow.getTitleBar().getIconPath().empty())
+            {
+                //ImGui::Image((void*)(intptr_t)editorWindow.getTitleBar().getIconPath().c_str(), ImVec2(20, 20));
+				ImGui::SameLine();
+                ImGui::Text(editorWindow.getTitleBar().getTitle().c_str());
+			
+            }
+        }
+    }
+
+	
+    ImGui::End();
+
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

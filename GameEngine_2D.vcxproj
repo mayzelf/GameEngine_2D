@@ -71,19 +71,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>E:\Github\GameEngine_2D\GameEngine_2D\externals</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.22621.0\um;C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.22621.0\shared;E:\Github\GameEngine_2D\GameEngine_2D\externals</IncludePath>
     <LibraryPath>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;E:\Github\GameEngine_2D\GameEngine_2D\externals;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>E:\Github\GameEngine_2D\GameEngine_2D\externals</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.22621.0\um;C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.22621.0\shared;E:\Github\GameEngine_2D\GameEngine_2D\externals</IncludePath>
     <LibraryPath>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;E:\Github\GameEngine_2D\GameEngine_2D\externals;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\Github\GameEngine_2D\GameEngine_2D\externals</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.22621.0\um;C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.22621.0\shared;E:\Github\GameEngine_2D\GameEngine_2D\externals</IncludePath>
     <LibraryPath>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>E:\Github\GameEngine_2D\GameEngine_2D\externals</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.22621.0\um;C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.22621.0\shared;E:\Github\GameEngine_2D\GameEngine_2D\externals</IncludePath>
     <LibraryPath>E:\Github\GameEngine_2D\GameEngine_2D\externals\SDL2\libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -172,6 +172,7 @@
     <ClCompile Include="externals\imgui\imgui_draw.cpp" />
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="model\components\title_bar.cpp" />
     <ClCompile Include="view\editor_window_renderer.cpp" />
     <ClCompile Include="model\editor_window.cpp" />
     <ClCompile Include="main.cpp" />
@@ -188,6 +189,8 @@
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="model\components\title_bar.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="view\editor_window_renderer.h" />
     <ClInclude Include="externals\SDL2\include\begin_code.h" />
     <ClInclude Include="externals\SDL2\include\close_code.h" />
@@ -281,6 +284,12 @@
     <ClInclude Include="externals\SDL2\include\SDL_video.h" />
     <ClInclude Include="externals\SDL2\include\SDL_vulkan.h" />
     <ClInclude Include="model\editor_window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ressources\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameEngine_2D.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -77,3 +77,13 @@ int EditorWindow::getMinimumHeight() const
 {
 	return minimumHeight;
 }
+
+void EditorWindow::setTitleBar(const TitleBar& titleBar)
+{
+	this->titleBar = titleBar;
+}
+
+const TitleBar& EditorWindow::getTitleBar() const
+{
+	return titleBar;
+}

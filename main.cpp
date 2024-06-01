@@ -16,6 +16,12 @@ int CALLBACK WinMain(
     window.setTitle("Game");
     window.setSize(800, 600);
     window.setMinimumSize(400, 300);
+    TitleBar titleBar = TitleBarBuilder()
+        .setIconPath("resources/icon.png")
+        .setFlags(SHOW_MINIMIZE_BUTTON | SHOW_CLOSE_BUTTON)
+        .setTitle("Maygine")
+        .build();
+    window.setTitleBar(titleBar);
 
     Editor_Window_Renderer editor_window_renderer(EditorWindow::getInstance());
     editor_window_renderer.init();

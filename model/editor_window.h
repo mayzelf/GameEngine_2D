@@ -2,6 +2,8 @@
 #define EDITORWINDOW_H
 #include <string>
 
+#include "components/title_bar.h"
+
 
 class EditorWindow
 {
@@ -19,12 +21,19 @@ public:
 	int getMinimumWidth() const;
 	int getMinimumHeight() const;
 
+	//Components
+	void setTitleBar(const TitleBar& titleBar);
+	const TitleBar& getTitleBar() const;
+
 private:
 	std::string title;
 	int width;
 	int height;
 	int minimumWidth;
 	int minimumHeight;
+
+	//Components
+	TitleBar titleBar;
 
 	EditorWindow();
 	EditorWindow(const EditorWindow&) = delete;
