@@ -25,7 +25,7 @@ void Editor_Window_Renderer::init()
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     // Create an SDL window without a title bar
-    this->window = SDL_CreateWindow("", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, editorWindow.getWidth(), editorWindow.getHeight(), SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
+    this->window = SDL_CreateWindow(editorWindow.getTitle().c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, editorWindow.getWidth(), editorWindow.getHeight(), SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
     gl_context = SDL_GL_CreateContext(this->window);
 
     // Setup Dear ImGui context
