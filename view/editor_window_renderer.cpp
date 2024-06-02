@@ -1,4 +1,4 @@
-#include "editor_window_renderer.h"
+﻿#include "editor_window_renderer.h"
 
 Editor_Window_Renderer::Editor_Window_Renderer(EditorWindow& window, HINSTANCE hInstance) : window(nullptr), editorWindow(window), hInstance(hInstance)
 {
@@ -106,14 +106,14 @@ void Editor_Window_Renderer::drawTitleBar()
 
 
             //Flags
-            ImGui::SameLine(ImGui::GetWindowWidth() - 200);
+            ImGui::SameLine(ImGui::GetWindowWidth() - 80);
 
-            if (ImGui::Button("Minimize"))
+            if (ImGui::Button("_"))
             {
                 SDL_MinimizeWindow(window);
             }
             ImGui::SameLine();
-            if (ImGui::Button("Maximize"))
+            if (ImGui::Button("[]"))
             {
                 if (editorWindow.getFlags() == WINDOW_MAXIMIZED)
                 {
@@ -143,7 +143,7 @@ void Editor_Window_Renderer::drawTitleBar()
                 }
             }
             ImGui::SameLine();
-            if (ImGui::Button("Close"))
+            if (ImGui::Button("x"))
             {
                 shutdown();
             }
