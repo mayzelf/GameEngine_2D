@@ -33,25 +33,19 @@ public:
     // Setters
     void setIconPath(const int& iconPath);
     void setTitle(const std::string& title);
-    void setShowMinimizeButton(bool showMinimizeButton);
-    void setShowMaximizeButton(bool showMaximizeButton);
-    void setShowCloseButton(bool showCloseButton);
+    void setFlags(int flags);
     void setDropdowns(const std::vector<Dropdown>& dropdowns);
 
     // Getters
     std::string getIconPath() const;
     std::string getTitle() const;
-    bool getShowMinimizeButton() const;
-    bool getShowMaximizeButton() const;
-    bool getShowCloseButton() const;
+    int getFlags() const;
     std::vector<Dropdown> getDropdowns() const;
 
 private:
     std::string m_iconPath;
     std::string m_title;
-    bool m_showMinimizeButton;
-    bool m_showMaximizeButton;
-    bool m_showCloseButton;
+    int m_flags;
     std::vector<Dropdown> m_dropdowns;
 };
 

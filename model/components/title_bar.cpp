@@ -4,9 +4,7 @@ TitleBar::TitleBar(const int& iconPath, int flags, const std::vector<Dropdown>& 
 {
 	m_iconPath = iconPath;
 	m_title = title;
-	m_showMinimizeButton = flags & SHOW_MINIMIZE_BUTTON;
-	m_showMaximizeButton = flags & SHOW_MAXIMIZE_BUTTON;
-	m_showCloseButton = flags & SHOW_CLOSE_BUTTON;
+	m_flags = flags;
 	m_dropdowns = dropdowns;
 }
 
@@ -21,19 +19,9 @@ void TitleBar::setTitle(const std::string& title)
     m_title = title;
 }
 
-void TitleBar::setShowMinimizeButton(bool showMinimizeButton)
+void TitleBar::setFlags(int flags)
 {
-    m_showMinimizeButton = showMinimizeButton;
-}
-
-void TitleBar::setShowMaximizeButton(bool showMaximizeButton)
-{
-    m_showMaximizeButton = showMaximizeButton;
-}
-
-void TitleBar::setShowCloseButton(bool showCloseButton)
-{
-    m_showCloseButton = showCloseButton;
+    m_flags = flags;
 }
 
 void TitleBar::setDropdowns(const std::vector<Dropdown>& dropdowns)
@@ -52,19 +40,9 @@ std::string TitleBar::getTitle() const
     return m_title;
 }
 
-bool TitleBar::getShowMinimizeButton() const
+int TitleBar::getFlags() const
 {
-    return m_showMinimizeButton;
-}
-
-bool TitleBar::getShowMaximizeButton() const
-{
-    return m_showMaximizeButton;
-}
-
-bool TitleBar::getShowCloseButton() const
-{
-    return m_showCloseButton;
+	return m_flags;
 }
 
 std::vector<Dropdown> TitleBar::getDropdowns() const
