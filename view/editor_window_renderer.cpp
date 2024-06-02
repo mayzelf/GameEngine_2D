@@ -86,7 +86,7 @@ void Editor_Window_Renderer::draw_title_bar() const
     ImGui::SetNextWindowPos(ImVec2(0, 0));
     ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editor_window_.getSize().x), 36.0f));
 
-    if (!editor_window_.getTitleBar().getIconPath().empty())
+    if (!editor_window_.getTitleBar().get_icon_path().empty())
     {
 	    if (constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse |
 		    ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar |
@@ -96,14 +96,14 @@ void Editor_Window_Renderer::draw_title_bar() const
             GLuint texture = utils::resources::loadTextureFromResource(h_instance_, IDB_PNG1);
             ImGui::Image(reinterpret_cast<void*>(static_cast<intptr_t>(texture)), ImVec2(20, 20));
             ImGui::SameLine();
-            if (!editor_window_.getTitleBar().getTitle().empty())
-                ImGui::TextUnformatted(editor_window_.getTitleBar().getTitle().c_str());
+            if (!editor_window_.getTitleBar().get_title().empty())
+                ImGui::TextUnformatted(editor_window_.getTitleBar().get_title().c_str());
 
 
             //Flags
             ImGui::SameLine(ImGui::GetWindowWidth() - 80);
 
-            if (editor_window_.getTitleBar().getFlags() & SHOW_MINIMIZE_BUTTON)
+            if (editor_window_.getTitleBar().get_flags() & SHOW_MINIMIZE_BUTTON)
             {
                 if (ImGui::Button("_"))
                 {
@@ -112,7 +112,7 @@ void Editor_Window_Renderer::draw_title_bar() const
                 ImGui::SameLine();
             }
 
-            if (editor_window_.getTitleBar().getFlags() & SHOW_MAXIMIZE_BUTTON)
+            if (editor_window_.getTitleBar().get_flags() & SHOW_MAXIMIZE_BUTTON)
             {
                 if (ImGui::Button("[]"))
                 {
@@ -144,7 +144,7 @@ void Editor_Window_Renderer::draw_title_bar() const
                 }
                 ImGui::SameLine();
             }
-            if (editor_window_.getTitleBar().getFlags() & SHOW_CLOSE_BUTTON)
+            if (editor_window_.getTitleBar().get_flags() & SHOW_CLOSE_BUTTON)
             {
                 if (ImGui::Button("x"))
                 {
