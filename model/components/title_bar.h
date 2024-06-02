@@ -9,12 +9,12 @@ class Dropdown
 	Dropdown(const std::string& name, const std::vector<std::string>& items);
 
 	// Setters
-	void setName(const std::string& name);
-	void setItems(const std::vector<std::string>& items);
+	void set_name(const std::string& name);
+	void set_items(const std::vector<std::string>& items);
 
 	// Getters
-	std::string getName() const;
-	std::vector<std::string> getItems() const;
+	std::string get_name() const;
+	std::vector<std::string> get_items() const;
 };
 
 enum TitleBarFlags
@@ -31,16 +31,16 @@ public:
     TitleBar(const int& iconPath, int flags, const std::vector<Dropdown>& dropdowns = std::vector<Dropdown>(), const std::string& title = "");
 
     // Setters
-    void setIconPath(const int& iconPath);
-    void setTitle(const std::string& title);
-    void setFlags(int flags);
-    void setDropdowns(const std::vector<Dropdown>& dropdowns);
+    void set_icon_path(const int& iconPath);
+    void set_title(const std::string& title);
+    void set_flags(int flags);
+    void set_dropdowns(const std::vector<Dropdown>& dropdowns);
 
     // Getters
-    std::string getIconPath() const;
-    std::string getTitle() const;
-    int getFlags() const;
-    std::vector<Dropdown> getDropdowns() const;
+    std::string get_icon_path() const;
+    std::string get_title() const;
+    int get_flags() const;
+    std::vector<Dropdown> get_dropdowns() const;
 
 private:
     std::string m_iconPath;
@@ -52,18 +52,18 @@ private:
 class TitleBarBuilder
 {
 public:
-    TitleBarBuilder& setIconPath(const int& iconPath) { m_iconPath = iconPath; return *this; }
-    TitleBarBuilder& setFlags(int flags) { m_flags = flags; return *this; }
-    TitleBarBuilder& setDropdowns(const std::vector<Dropdown>& dropdowns) { m_dropdowns = dropdowns; return *this; }
-    TitleBarBuilder& setTitle(const std::string& title) { m_title = title; return *this; }
+    TitleBarBuilder& set_icon_path(const int& iconPath) { m_icon_path_ = iconPath; return *this; }
+    TitleBarBuilder& set_flags(int flags) { m_flags_ = flags; return *this; }
+    TitleBarBuilder& set_dropdowns(const std::vector<Dropdown>& dropdowns) { m_dropdowns_ = dropdowns; return *this; }
+    TitleBarBuilder& set_title(const std::string& title) { m_title_ = title; return *this; }
 
-    TitleBar build() const { return TitleBar(m_iconPath, m_flags, m_dropdowns, m_title); }
+    [[nodiscard]] TitleBar build() const { return TitleBar(m_icon_path_, m_flags_, m_dropdowns_, m_title_); }
 
 private:
-    int m_iconPath;
-    int m_flags = 0;
-    std::vector<Dropdown> m_dropdowns;
-    std::string m_title;
+    int m_icon_path_;
+    int m_flags_ = 0;
+    std::vector<Dropdown> m_dropdowns_;
+    std::string m_title_;
 };
 
 

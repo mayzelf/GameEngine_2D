@@ -12,17 +12,17 @@ private:
     Editor_Window_Renderer& renderer;
     bool isResizing;
     SDL_Point resizeStartPos;
-    Sdl_Render_Handler* sdl_render_handler;
+    Sdl_Render_Handler* sdl_render_handler_;
 
 
-    void handleQuitEvent();
-    void handleWindowEvent(const SDL_Event& event);
-    void handleMouseMotionEvent(const SDL_Event& event);
-    void handleMouseButtonDownEvent(const SDL_Event& event);
-    void handleMouseButtonUpEvent(const SDL_Event& event);
-    void resizeWindow(const SDL_Event& event);
-    void startResizing(const SDL_Event& event);
-    void stopResizing();
+    static void handle_quit_event();
+    static void handle_window_event(const SDL_Event& event);
+    void handle_mouse_motion_event(const SDL_Event& event);
+    void handle_mouse_button_down_event(const SDL_Event& event);
+    void handle_mouse_button_up_event(const SDL_Event& event);
+    void resize_window(const SDL_Event& event);
+    void start_resizing(const SDL_Event& event);
+    void stop_resizing();
 };
 
 #endif

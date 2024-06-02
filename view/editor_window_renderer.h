@@ -16,22 +16,22 @@
 class Editor_Window_Renderer
 {
 
-    EditorWindow& editorWindow;
+    EditorWindow& editor_window_;
 public:
-    Editor_Window_Renderer(EditorWindow& window, HINSTANCE hInstance);
+    Editor_Window_Renderer(EditorWindow& window, HINSTANCE h_instance);
 	~Editor_Window_Renderer();
 
     void init();
-    void present();
-    void shutdown();
+    void present() const;
+    void shutdown() const;
 
 
     //Components
-	void drawTitleBar();
+	void draw_title_bar() const;
 
 private:
-    Sdl_Render_Handler* sdl_render_handler;
-    HINSTANCE hInstance;
+    Sdl_Render_Handler* sdl_render_handler_;
+    HINSTANCE h_instance_;
 };
 
 #endif
