@@ -26,6 +26,9 @@ public:
 
     SDL_Window* getWindow() { return window; }
 
+    //Components
+	void drawTitleBar();
+
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;

@@ -63,71 +63,8 @@ void Editor_Window_Renderer::present()
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
-
-
-    ImGui::ShowDemoWindow();
-    ImGui::SetNextWindowPos(ImVec2(0, 0));
-    ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editorWindow.getWidth()), 36.0f));
     
-    if(!editorWindow.getTitleBar().getIconPath().empty())
-    {
-        ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar;
-
-        if (ImGui::Begin("editor_window_title", nullptr, window_flags))
-        {
-            
-            GLuint texture = utils::resources::loadTextureFromResource(hInstance, IDB_PNG1);
-            ImGui::Image((void*)(intptr_t)texture, ImVec2(20, 20));
-            ImGui::SameLine();
-            if(!editorWindow.getTitleBar().getTitle().empty())
-				ImGui::Text(editorWindow.getTitleBar().getTitle().c_str());
-
-
-            //Flags
-            ImGui::SameLine(ImGui::GetWindowWidth() - 205);
-
-            if (ImGui::Button("Minimize"))
-            {
-                SDL_MinimizeWindow(window);
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("Maximize"))
-            {
-                if (editorWindow.getFlags() == WINDOW_MAXIMIZED)
-                {
-                    // Restore window
-                    const glm::vec2 pos = editorWindow.getOriginalPosition();
-                	SDL_SetWindowPosition(window, static_cast<int>(pos.x), static_cast<int>(pos.y));
-                    glm::vec2 size = editorWindow.getOriginalSize();
-                	editorWindow.setSize(size.x, size.y);
-                    editorWindow.setFlags(editorWindow.getFlags() & ~WINDOW_MAXIMIZED);
-                    
-
-                }
-                else
-                {
-                    // Maximize window
-                    const RECT monitorSizeMinusTaskbar = utils::windows::GetMonitorSizeMinusTaskbar();
-                    const int mon_width = monitorSizeMinusTaskbar.right - monitorSizeMinusTaskbar.left;
-                    const int mon_height = monitorSizeMinusTaskbar.bottom - monitorSizeMinusTaskbar.top;
-                    editorWindow.setOriginalSize(editorWindow.getWidth(), editorWindow.getHeight());
-                    int x, y;
-                    SDL_GetWindowPosition(window, &x, &y);
-                    editorWindow.setOriginalPosition(x, y);
-                	SDL_SetWindowPosition(window, 0, 0);
-                    editorWindow.setSize(mon_width, mon_height);
-                    editorWindow.setFlags(WINDOW_MAXIMIZED);
-                    
-                }
-            }
-            ImGui::SameLine();
-            if (ImGui::Button("Close"))
-            {
-                shutdown();
-            }
-        }
-    }
-
+    drawTitleBar();
 	
     ImGui::End();
 
@@ -147,6 +84,71 @@ void Editor_Window_Renderer::shutdown()
 
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+}
+
+void Editor_Window_Renderer::drawTitleBar()
+{
+    ImGui::SetNextWindowPos(ImVec2(0, 0));
+    ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editorWindow.getWidth()), 36.0f));
+
+    if (!editorWindow.getTitleBar().getIconPath().empty())
+    {
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar;
+
+        if (ImGui::Begin("editor_window_title", nullptr, window_flags))
+        {
+
+            GLuint texture = utils::resources::loadTextureFromResource(hInstance, IDB_PNG1);
+            ImGui::Image((void*)(intptr_t)texture, ImVec2(20, 20));
+            ImGui::SameLine();
+            if (!editorWindow.getTitleBar().getTitle().empty())
+                ImGui::Text(editorWindow.getTitleBar().getTitle().c_str());
+
+
+            //Flags
+            ImGui::SameLine(ImGui::GetWindowWidth() - 200);
+
+            if (ImGui::Button("Minimize"))
+            {
+                SDL_MinimizeWindow(window);
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Maximize"))
+            {
+                if (editorWindow.getFlags() == WINDOW_MAXIMIZED)
+                {
+                    // Restore window
+                    const glm::vec2 pos = editorWindow.getOriginalPosition();
+                    SDL_SetWindowPosition(window, static_cast<int>(pos.x), static_cast<int>(pos.y));
+                    const glm::vec2 size = editorWindow.getOriginalSize();
+                    editorWindow.setSize(static_cast<int>(size.x), static_cast<int>(size.y));
+                    editorWindow.setFlags(editorWindow.getFlags() & ~WINDOW_MAXIMIZED);
+
+
+                }
+                else
+                {
+                    // Maximize window
+                    const RECT monitorSizeMinusTaskbar = utils::windows::GetMonitorSizeMinusTaskbar();
+                    const int mon_width = monitorSizeMinusTaskbar.right - monitorSizeMinusTaskbar.left;
+                    const int mon_height = monitorSizeMinusTaskbar.bottom - monitorSizeMinusTaskbar.top;
+                    editorWindow.setOriginalSize(editorWindow.getWidth(), editorWindow.getHeight());
+                    int x, y;
+                    SDL_GetWindowPosition(window, &x, &y);
+                    editorWindow.setOriginalPosition(x, y);
+                    SDL_SetWindowPosition(window, 0, 0);
+                    editorWindow.setSize(mon_width, mon_height);
+                    editorWindow.setFlags(WINDOW_MAXIMIZED);
+
+                }
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Close"))
+            {
+                shutdown();
+            }
+        }
+    }
 }
 
 
