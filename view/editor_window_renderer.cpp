@@ -25,7 +25,7 @@ void Editor_Window_Renderer::init()
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     // Create an SDL window without a title bar
-    this->window = SDL_CreateWindow(editorWindow.getTitle().c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, editorWindow.getWidth(), editorWindow.getHeight(), SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
+    this->window = SDL_CreateWindow(editorWindow.getTitle().c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, editorWindow.getSize().y, editorWindow.getSize().x, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
     gl_context = SDL_GL_CreateContext(this->window);
 
     // Setup Dear ImGui context
@@ -47,10 +47,10 @@ void Editor_Window_Renderer::present()
     // Check if SDL window size matches EditorWindow size
     int sdlWindowWidth, sdlWindowHeight;
     SDL_GetWindowSize(window, &sdlWindowWidth, &sdlWindowHeight);
-    if (sdlWindowWidth != editorWindow.getWidth() || sdlWindowHeight != editorWindow.getHeight())
+    if (sdlWindowWidth != editorWindow.getSize().x || sdlWindowHeight != editorWindow.getSize().y)
     {
         // Update SDL window size
-        SDL_SetWindowSize(window, editorWindow.getWidth(), editorWindow.getHeight());
+        SDL_SetWindowSize(window, editorWindow.getSize().x, editorWindow.getSize().y);
     }
 
 
@@ -89,7 +89,7 @@ void Editor_Window_Renderer::shutdown()
 void Editor_Window_Renderer::drawTitleBar()
 {
     ImGui::SetNextWindowPos(ImVec2(0, 0));
-    ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editorWindow.getWidth()), 36.0f));
+    ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editorWindow.getSize().x), 36.0f));
 
     if (!editorWindow.getTitleBar().getIconPath().empty())
     {
@@ -118,10 +118,10 @@ void Editor_Window_Renderer::drawTitleBar()
                 if (editorWindow.getFlags() == WINDOW_MAXIMIZED)
                 {
                     // Restore window
-                    const glm::vec2 pos = editorWindow.getOriginalPosition();
-                    SDL_SetWindowPosition(window, static_cast<int>(pos.x), static_cast<int>(pos.y));
-                    const glm::vec2 size = editorWindow.getOriginalSize();
-                    editorWindow.setSize(static_cast<int>(size.x), static_cast<int>(size.y));
+                    const glm::vec<2, int> pos = editorWindow.getOriginalPosition();
+                    SDL_SetWindowPosition(window, pos.x, pos.y);
+                    const glm::vec<2, int> size = editorWindow.getOriginalSize();
+                    editorWindow.setSize(size.x, size.y);
                     editorWindow.setFlags(editorWindow.getFlags() & ~WINDOW_MAXIMIZED);
 
 
@@ -132,7 +132,7 @@ void Editor_Window_Renderer::drawTitleBar()
                     const RECT monitorSizeMinusTaskbar = utils::windows::GetMonitorSizeMinusTaskbar();
                     const int mon_width = monitorSizeMinusTaskbar.right - monitorSizeMinusTaskbar.left;
                     const int mon_height = monitorSizeMinusTaskbar.bottom - monitorSizeMinusTaskbar.top;
-                    editorWindow.setOriginalSize(editorWindow.getWidth(), editorWindow.getHeight());
+                    editorWindow.setOriginalSize(editorWindow.getSize().x, editorWindow.getSize().y);
                     int x, y;
                     SDL_GetWindowPosition(window, &x, &y);
                     editorWindow.setOriginalPosition(x, y);

@@ -26,12 +26,10 @@ public:
 	void setOriginalPosition(int x, int y);
 
 	const std::string& getTitle() const;
-	int getWidth() const;
-	int getHeight() const;
-	int getMinimumWidth() const;
-	int getMinimumHeight() const;
-	glm::vec2 getOriginalSize() const;
-	glm::vec2 getOriginalPosition() const;
+	glm::vec<2, int> getSize() const;
+	glm::vec<2, int> getMinimumSize() const;
+	glm::vec<2, int> getOriginalSize() const;
+	glm::vec<2, int> getOriginalPosition() const;
 	int getFlags() const;
 
 	//Components
@@ -40,12 +38,10 @@ public:
 
 private:
 	std::string title;
-	int width;
-	int height;
-	int minimumWidth;
-	int minimumHeight;
-	glm::vec2 originalSize;
-	glm::vec2 originalPosition;
+	glm::vec<2, int> size;
+	glm::vec<2, int> minimumSize;
+	glm::vec<2, int> originalSize;
+	glm::vec<2, int> originalPosition;
 	int flags;
 
 	//Components

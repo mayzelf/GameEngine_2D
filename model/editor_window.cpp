@@ -1,7 +1,7 @@
 #include "editor_window.h"
 
 // Default constructor for EditorWindow class
-EditorWindow::EditorWindow() : title(""), width(0), height(0)
+EditorWindow::EditorWindow() : title(""), size(0,0)
 {
 }
 
@@ -21,32 +21,30 @@ void EditorWindow::setTitle(const std::string& title)
 // Set the size of the EditorWindow
 void EditorWindow::setSize(int width, int height)
 {
-	this->width = width;
-	this->height = height;
+	size = glm::vec2(width, height);
 }
 
 void EditorWindow::setMinimumSize(int width, int height)
 {
-	this->minimumWidth = width;
-	this->minimumHeight = height;
+	minimumSize = glm::vec2(width, height);
 }
 
 void EditorWindow::resize(int width, int height)
 {
-	if(width < minimumWidth)
+	if(width < minimumSize.x)
 	{
-		width = minimumWidth;
+		width = minimumSize.x;
 	}else
 	{
-		this->width = width;
+		this->size.x = width;
 	}
-	if (height < minimumHeight)
+	if (height < minimumSize.y)
 	{
-		height = minimumHeight;
+		height = minimumSize.y;
 	}
 	else
 	{
-		this->height = height;
+		this->size.y = height;
 	}
 }
 
@@ -72,33 +70,22 @@ const std::string& EditorWindow::getTitle() const
 }
 
 // Get the width of the EditorWindow
-int EditorWindow::getWidth() const
+glm::vec<2, int> EditorWindow::getSize() const
 {
-	return width;
+	return size;
 }
 
-// Get the height of the EditorWindow
-int EditorWindow::getHeight() const
+glm::vec<2, int> EditorWindow::getMinimumSize() const
 {
-	return height;
+	return minimumSize;
 }
 
-int EditorWindow::getMinimumWidth() const
-{
-	return minimumWidth;
-}
-
-int EditorWindow::getMinimumHeight() const
-{
-	return minimumHeight;
-}
-
-glm::vec2 EditorWindow::getOriginalSize() const
+glm::vec<2, int> EditorWindow::getOriginalSize() const
 {
 	return originalSize;
 }
 
-glm::vec2 EditorWindow::getOriginalPosition() const
+glm::vec<2, int> EditorWindow::getOriginalPosition() const
 {
 	return originalPosition;
 }
