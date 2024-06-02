@@ -9,43 +9,43 @@ TitleBar::TitleBar(const int& iconPath, int flags, const std::vector<Dropdown>& 
 }
 
 // Setters
-void TitleBar::setIconPath(const int& iconPath)
+void TitleBar::set_icon_path(const int& iconPath)
 {
     m_iconPath = iconPath;
 }
 
-void TitleBar::setTitle(const std::string& title)
+void TitleBar::set_title(const std::string& title)
 {
     m_title = title;
 }
 
-void TitleBar::setFlags(int flags)
+void TitleBar::set_flags(int flags)
 {
     m_flags = flags;
 }
 
-void TitleBar::setDropdowns(const std::vector<Dropdown>& dropdowns)
+void TitleBar::set_dropdowns(const std::vector<Dropdown>& dropdowns)
 {
     m_dropdowns = dropdowns;
 }
 
 // Getters
-std::string TitleBar::getIconPath() const
+std::string TitleBar::get_icon_path() const
 {
     return m_iconPath;
 }
 
-std::string TitleBar::getTitle() const
+std::string TitleBar::get_title() const
 {
     return m_title;
 }
 
-int TitleBar::getFlags() const
+int TitleBar::get_flags() const
 {
 	return m_flags;
 }
 
-std::vector<Dropdown> TitleBar::getDropdowns() const
+std::vector<Dropdown> TitleBar::get_dropdowns() const
 {
     return m_dropdowns;
 }
