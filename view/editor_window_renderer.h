@@ -10,6 +10,7 @@
 #include "../model/editor_window.h"
 #include "../utils.h"
 #include "../resource.h"
+#include "sdl_render_handler.h"
 
 
 class Editor_Window_Renderer
@@ -24,15 +25,12 @@ public:
     void present();
     void shutdown();
 
-    SDL_Window* getWindow() { return window; }
 
     //Components
 	void drawTitleBar();
 
 private:
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    SDL_GLContext gl_context;
+    Sdl_Render_Handler* sdl_render_handler;
     HINSTANCE hInstance;
 };
 

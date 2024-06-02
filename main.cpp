@@ -14,16 +14,17 @@ int CALLBACK WinMain(
     _In_ int       nCmdShow
 )
 {
-    EditorWindow& window = EditorWindow::getInstance();
-    window.setTitle("Maygine");
-    window.setSize(800, 600);
-    window.setMinimumSize(400, 300);
-    TitleBar titleBar = TitleBarBuilder()
-        .setIconPath(IDB_PNG1)
-        .setFlags(SHOW_MINIMIZE_BUTTON | SHOW_CLOSE_BUTTON)
+    EditorWindow& window = EditorWindowBuilder()
         .setTitle("Maygine")
+		.setPosition(0,0)
+        .setSize(800, 600)
+        .setMinimumSize(400, 300)
+        .setTitleBar(TitleBarBuilder()
+            .setIconPath(IDB_PNG1)
+            .setFlags(SHOW_MINIMIZE_BUTTON | SHOW_CLOSE_BUTTON)
+            .setTitle("Maygine")
+            .build())
         .build();
-    window.setTitleBar(titleBar);
 
     Editor_Window_Renderer editor_window_renderer(EditorWindow::getInstance(), hInstance);
     editor_window_renderer.init();

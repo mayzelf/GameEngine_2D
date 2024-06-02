@@ -1,6 +1,7 @@
 ﻿#include "editor_window_renderer.h"
 
-Editor_Window_Renderer::Editor_Window_Renderer(EditorWindow& window, HINSTANCE hInstance) : window(nullptr), editorWindow(window), hInstance(hInstance)
+
+Editor_Window_Renderer::Editor_Window_Renderer(EditorWindow& window, HINSTANCE hInstance) : editorWindow(window), hInstance(hInstance)
 {
 }
 
@@ -9,24 +10,12 @@ Editor_Window_Renderer::~Editor_Window_Renderer()
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
-
-    SDL_DestroyWindow(window);
-    SDL_Quit();
 }
 
 void Editor_Window_Renderer::init()
 {
-
-    SDL_Init(SDL_INIT_VIDEO);
-
-    // Use OpenGL 3.3 core profile
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
-    // Create an SDL window without a title bar
-    this->window = SDL_CreateWindow(editorWindow.getTitle().c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, editorWindow.getSize().y, editorWindow.getSize().x, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS);
-    gl_context = SDL_GL_CreateContext(this->window);
+    this->sdl_render_handler = &Sdl_Render_Handler::getInstance();
+    sdl_render_handler->init(editorWindow);
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -38,21 +27,19 @@ void Editor_Window_Renderer::init()
     ImGui::StyleColorsDark();
 
     // Setup Platform/Renderer bindings
-    ImGui_ImplSDL2_InitForOpenGL(this->window, gl_context);
+    ImGui_ImplSDL2_InitForOpenGL(sdl_render_handler->getWindow(), sdl_render_handler->getGLContext());
     ImGui_ImplOpenGL3_Init();
 }
 
 void Editor_Window_Renderer::present()
 {
     // Check if SDL window size matches EditorWindow size
-    int sdlWindowWidth, sdlWindowHeight;
-    SDL_GetWindowSize(window, &sdlWindowWidth, &sdlWindowHeight);
-    if (sdlWindowWidth != editorWindow.getSize().x || sdlWindowHeight != editorWindow.getSize().y)
+    glm::vec<2, int> windowSize = sdl_render_handler->getWindowSize();
+    if (windowSize.x != editorWindow.getSize().x || windowSize.y != editorWindow.getSize().y)
     {
         // Update SDL window size
-        SDL_SetWindowSize(window, editorWindow.getSize().x, editorWindow.getSize().y);
+        sdl_render_handler->setWindowSize(editorWindow.getSize().x, editorWindow.getSize().y);
     }
-
 
     // Clear screen
     glClearColor(0.2f, 0.0f, 0.0f, 1.0f);
@@ -72,7 +59,7 @@ void Editor_Window_Renderer::present()
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     // Swap SDL window buffers
-    SDL_GL_SwapWindow(window);
+    sdl_render_handler->swapWindowBuffer();
 }
 
 void Editor_Window_Renderer::shutdown()
@@ -82,8 +69,7 @@ void Editor_Window_Renderer::shutdown()
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
 
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	sdl_render_handler->~Sdl_Render_Handler();
 }
 
 void Editor_Window_Renderer::drawTitleBar()
@@ -110,7 +96,7 @@ void Editor_Window_Renderer::drawTitleBar()
 
             if (ImGui::Button("_"))
             {
-                SDL_MinimizeWindow(window);
+                sdl_render_handler->minimizeWindow();
             }
             ImGui::SameLine();
             if (ImGui::Button("[]"))
@@ -119,7 +105,7 @@ void Editor_Window_Renderer::drawTitleBar()
                 {
                     // Restore window
                     const glm::vec<2, int> pos = editorWindow.getOriginalPosition();
-                    SDL_SetWindowPosition(window, pos.x, pos.y);
+                    sdl_render_handler->setWindowPosition(pos.x, pos.y);
                     const glm::vec<2, int> size = editorWindow.getOriginalSize();
                     editorWindow.setSize(size.x, size.y);
                     editorWindow.setFlags(editorWindow.getFlags() & ~WINDOW_MAXIMIZED);
@@ -133,10 +119,9 @@ void Editor_Window_Renderer::drawTitleBar()
                     const int mon_width = monitorSizeMinusTaskbar.right - monitorSizeMinusTaskbar.left;
                     const int mon_height = monitorSizeMinusTaskbar.bottom - monitorSizeMinusTaskbar.top;
                     editorWindow.setOriginalSize(editorWindow.getSize().x, editorWindow.getSize().y);
-                    int x, y;
-                    SDL_GetWindowPosition(window, &x, &y);
-                    editorWindow.setOriginalPosition(x, y);
-                    SDL_SetWindowPosition(window, 0, 0);
+                    glm::vec<2, int> pos = editorWindow.getPosition();
+                    editorWindow.setOriginalPosition(pos.x, pos.y);
+                    sdl_render_handler->setWindowPosition(0, 0);
                     editorWindow.setSize(mon_width, mon_height);
                     editorWindow.setFlags(WINDOW_MAXIMIZED);
 

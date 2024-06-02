@@ -12,6 +12,7 @@ private:
     Editor_Window_Renderer& renderer;
     bool isResizing;
     SDL_Point resizeStartPos;
+    Sdl_Render_Handler* sdl_render_handler;
 
 
     void handleQuitEvent();

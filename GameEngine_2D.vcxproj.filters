@@ -60,6 +60,9 @@
     <ClCompile Include="externals\glm\detail\glm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="view\sdl_render_handler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="model\editor_window.h">
@@ -1128,6 +1131,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="externals\glm\vector_relational.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view\sdl_render_handler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

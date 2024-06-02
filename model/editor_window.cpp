@@ -1,5 +1,6 @@
 #include "editor_window.h"
 
+
 // Default constructor for EditorWindow class
 EditorWindow::EditorWindow() : title(""), size(0,0)
 {
@@ -16,6 +17,11 @@ EditorWindow& EditorWindow::getInstance()
 void EditorWindow::setTitle(const std::string& title)
 {
 	this->title = title;
+}
+
+void EditorWindow::setPosition(int x, int y)
+{
+	position = glm::vec2(x, y);
 }
 
 // Set the size of the EditorWindow
@@ -67,6 +73,11 @@ void EditorWindow::setOriginalPosition(int x, int y)
 const std::string& EditorWindow::getTitle() const
 {
 	return title;
+}
+
+glm::vec<2, int> EditorWindow::getPosition() const
+{
+	return position;
 }
 
 // Get the width of the EditorWindow
