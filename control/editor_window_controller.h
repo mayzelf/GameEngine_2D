@@ -10,6 +10,8 @@ public:
 
 private:
     Editor_Window_Renderer& renderer;
+    bool isResizing;
+    SDL_Point resizeStartPos;
 };
 
 #endif

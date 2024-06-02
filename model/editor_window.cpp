@@ -50,6 +50,21 @@ void EditorWindow::resize(int width, int height)
 	}
 }
 
+void EditorWindow::setFlags(int flags)
+{
+	this->flags = flags;
+}
+
+void EditorWindow::setOriginalSize(int width, int height)
+{
+	originalSize = glm::vec2(width, height);
+}
+
+void EditorWindow::setOriginalPosition(int x, int y)
+{
+	originalPosition = glm::vec2(x, y);
+}
+
 // Get the title of the EditorWindow
 const std::string& EditorWindow::getTitle() const
 {
@@ -76,6 +91,21 @@ int EditorWindow::getMinimumWidth() const
 int EditorWindow::getMinimumHeight() const
 {
 	return minimumHeight;
+}
+
+glm::vec2 EditorWindow::getOriginalSize() const
+{
+	return originalSize;
+}
+
+glm::vec2 EditorWindow::getOriginalPosition() const
+{
+	return originalPosition;
+}
+
+int EditorWindow::getFlags() const
+{
+	return flags;
 }
 
 void EditorWindow::setTitleBar(const TitleBar& titleBar)

@@ -98,6 +98,30 @@ GLuint utils::resources::loadTextureFromResource(HINSTANCE hInstance, int resour
     return texture;
 }
 
+RECT utils::windows::GetMonitorSizeMinusTaskbar()
+{
+    // Get the handle of the primary monitor
+    HMONITOR hMonitor = MonitorFromWindow(NULL, MONITOR_DEFAULTTOPRIMARY);
+
+    // Get monitor information
+    MONITORINFO monitorInfo;
+    monitorInfo.cbSize = sizeof(MONITORINFO);
+    GetMonitorInfo(hMonitor, &monitorInfo);
+
+    // Get the taskbar size
+    APPBARDATA appBarData;
+    appBarData.cbSize = sizeof(APPBARDATA);
+    SHAppBarMessage(ABM_GETTASKBARPOS, &appBarData);
+    RECT taskbarRect = appBarData.rc;
+
+    // Calculate the monitor size minus the taskbar
+    RECT monitorRect = monitorInfo.rcMonitor;
+    monitorRect.bottom -= taskbarRect.bottom - taskbarRect.top;
+
+    // Return the monitor size minus the taskbar
+    return monitorRect;
+}
+
 
 
 

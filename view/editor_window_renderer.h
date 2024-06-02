@@ -24,6 +24,8 @@ public:
     void present();
     void shutdown();
 
+    SDL_Window* getWindow() { return window; }
+
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;

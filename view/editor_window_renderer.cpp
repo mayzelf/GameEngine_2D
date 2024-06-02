@@ -44,6 +44,16 @@ void Editor_Window_Renderer::init()
 
 void Editor_Window_Renderer::present()
 {
+    // Check if SDL window size matches EditorWindow size
+    int sdlWindowWidth, sdlWindowHeight;
+    SDL_GetWindowSize(window, &sdlWindowWidth, &sdlWindowHeight);
+    if (sdlWindowWidth != editorWindow.getWidth() || sdlWindowHeight != editorWindow.getHeight())
+    {
+        // Update SDL window size
+        SDL_SetWindowSize(window, editorWindow.getWidth(), editorWindow.getHeight());
+    }
+
+
     // Clear screen
     glClearColor(0.2f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -57,24 +67,63 @@ void Editor_Window_Renderer::present()
 
     ImGui::ShowDemoWindow();
     ImGui::SetNextWindowPos(ImVec2(0, 0));
-    ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editorWindow.getWidth()), 30.0f));
+    ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editorWindow.getWidth()), 36.0f));
     
     if(!editorWindow.getTitleBar().getIconPath().empty())
     {
-        ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar;
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar;
 
         if (ImGui::Begin("editor_window_title", nullptr, window_flags))
         {
-            if (!editorWindow.getTitleBar().getIconPath().empty())
+            
+            GLuint texture = utils::resources::loadTextureFromResource(hInstance, IDB_PNG1);
+            ImGui::Image((void*)(intptr_t)texture, ImVec2(20, 20));
+            ImGui::SameLine();
+            if(!editorWindow.getTitleBar().getTitle().empty())
+				ImGui::Text(editorWindow.getTitleBar().getTitle().c_str());
+
+
+            //Flags
+            ImGui::SameLine(ImGui::GetWindowWidth() - 205);
+
+            if (ImGui::Button("Minimize"))
             {
-                GLuint texture = utils::resources::loadTextureFromResource(hInstance, IDB_PNG1);
-                if (texture == 0)
-            	{
-                    ImGui::Text("Failed");
+                SDL_MinimizeWindow(window);
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Maximize"))
+            {
+                if (editorWindow.getFlags() == WINDOW_MAXIMIZED)
+                {
+                    // Restore window
+                    const glm::vec2 pos = editorWindow.getOriginalPosition();
+                	SDL_SetWindowPosition(window, static_cast<int>(pos.x), static_cast<int>(pos.y));
+                    glm::vec2 size = editorWindow.getOriginalSize();
+                	editorWindow.setSize(size.x, size.y);
+                    editorWindow.setFlags(editorWindow.getFlags() & ~WINDOW_MAXIMIZED);
+                    
+
                 }
-            	ImGui::Image((void*)(intptr_t)texture, ImVec2(20, 20));
-                ImGui::SameLine();
-                ImGui::Text(editorWindow.getTitleBar().getTitle().c_str());
+                else
+                {
+                    // Maximize window
+                    const RECT monitorSizeMinusTaskbar = utils::windows::GetMonitorSizeMinusTaskbar();
+                    const int mon_width = monitorSizeMinusTaskbar.right - monitorSizeMinusTaskbar.left;
+                    const int mon_height = monitorSizeMinusTaskbar.bottom - monitorSizeMinusTaskbar.top;
+                    editorWindow.setOriginalSize(editorWindow.getWidth(), editorWindow.getHeight());
+                    int x, y;
+                    SDL_GetWindowPosition(window, &x, &y);
+                    editorWindow.setOriginalPosition(x, y);
+                	SDL_SetWindowPosition(window, 0, 0);
+                    editorWindow.setSize(mon_width, mon_height);
+                    editorWindow.setFlags(WINDOW_MAXIMIZED);
+                    
+                }
+            }
+            ImGui::SameLine();
+            if (ImGui::Button("Close"))
+            {
+                shutdown();
             }
         }
     }
@@ -91,6 +140,7 @@ void Editor_Window_Renderer::present()
 
 void Editor_Window_Renderer::shutdown()
 {
+    
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
