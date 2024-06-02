@@ -41,6 +41,14 @@ void Editor_Window_Renderer::present()
         sdl_render_handler->setWindowSize(editorWindow.getSize().x, editorWindow.getSize().y);
     }
 
+    // Check if SDL window position matches EditorWindow position
+    glm::vec<2, int> windowPosition = sdl_render_handler->getWindowPosition();
+    if (windowPosition.x != editorWindow.getPosition().x || windowPosition.y != editorWindow.getPosition().y)
+    {
+        // Update SDL window position
+        sdl_render_handler->setWindowPosition(editorWindow.getPosition().x, editorWindow.getPosition().y);
+    }
+
     // Clear screen
     glClearColor(0.2f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
