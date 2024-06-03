@@ -86,7 +86,7 @@ void Editor_Window_Renderer::draw_title_bar() const
     ImGui::SetNextWindowPos(ImVec2(0, 0));
     ImGui::SetNextWindowSize(ImVec2(static_cast<float>(editor_window_.getSize().x), 36.0f));
 
-    if (!editor_window_.getTitleBar().get_icon_path().empty())
+    if (editor_window_.getTitleBar().get_icon_path() > 0)
     {
 	    if (constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse |
 		    ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar |

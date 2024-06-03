@@ -1,8 +1,8 @@
 #include "title_bar.h"
 
-TitleBar::TitleBar(const int& iconPath, int flags, const std::vector<Dropdown>& dropdowns, const std::string& title)
+TitleBar::TitleBar(const int& icon_path, int flags, const std::vector<Dropdown>& dropdowns, const std::string& title, const glm::vec<2, int>& size)
 {
-	m_iconPath = iconPath;
+	m_iconPath = icon_path;
 	m_title = title;
 	m_flags = flags;
 	m_dropdowns = dropdowns;
@@ -30,7 +30,7 @@ void TitleBar::set_dropdowns(const std::vector<Dropdown>& dropdowns)
 }
 
 // Getters
-std::string TitleBar::get_icon_path() const
+int TitleBar::get_icon_path() const
 {
     return m_iconPath;
 }
