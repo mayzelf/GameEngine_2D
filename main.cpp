@@ -21,7 +21,7 @@ int CALLBACK WinMain(
         .setMinimumSize(400, 300)
         .setTitleBar(TitleBarBuilder()
             .set_icon_path(IDB_PNG1)
-            .set_flags(SHOW_MINIMIZE_BUTTON | SHOW_CLOSE_BUTTON)
+            .set_flags(SHOW_MINIMIZE_BUTTON | SHOW_CLOSE_BUTTON | SHOW_MAXIMIZE_BUTTON)
             .set_title("Maygine")
             .build())
         .build();

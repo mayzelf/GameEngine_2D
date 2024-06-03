@@ -101,19 +101,23 @@ void Editor_Window_Renderer::draw_title_bar() const
 
 
             //Flags
-            ImGui::SameLine(ImGui::GetWindowWidth() - 80);
+            int right_offset = 25;
 
-            if (editor_window_.getTitleBar().get_flags() & SHOW_MINIMIZE_BUTTON)
+            if (editor_window_.getTitleBar().get_flags() & SHOW_CLOSE_BUTTON)
             {
-                if (ImGui::Button("_"))
+                ImGui::SameLine(ImGui::GetWindowWidth() - right_offset);
+                if (ImGui::Button("x"))
                 {
-                    sdl_render_handler_->minimizeWindow();
+                    shutdown();
                 }
-                ImGui::SameLine();
+                right_offset += 20;
+                
             }
 
             if (editor_window_.getTitleBar().get_flags() & SHOW_MAXIMIZE_BUTTON)
             {
+                right_offset += 7;
+                ImGui::SameLine(ImGui::GetWindowWidth() - right_offset);
                 if (ImGui::Button("[]"))
                 {
                     if (editor_window_.getFlags() == WINDOW_MAXIMIZED)
@@ -142,13 +146,15 @@ void Editor_Window_Renderer::draw_title_bar() const
 
                     }
                 }
-                ImGui::SameLine();
+                right_offset += 20;
+                
             }
-            if (editor_window_.getTitleBar().get_flags() & SHOW_CLOSE_BUTTON)
+            if (editor_window_.getTitleBar().get_flags() & SHOW_MINIMIZE_BUTTON)
             {
-                if (ImGui::Button("x"))
+                ImGui::SameLine(ImGui::GetWindowWidth() - right_offset);
+                if (ImGui::Button("_"))
                 {
-                    shutdown();
+                    sdl_render_handler_->minimizeWindow();
                 }
             }
         }
