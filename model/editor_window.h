@@ -36,7 +36,7 @@ public:
 
 	//Components
 	void setTitleBar(const TitleBar& titleBar);
-	const TitleBar& getTitleBar() const;
+	TitleBar& getTitleBar();
 
 private:
 	std::string title;

@@ -38,65 +38,63 @@ void Editor_Window_Controller::handle_quit_event() {
 }
 
 void Editor_Window_Controller::handle_window_event(const SDL_Event& event) {
-    if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-        EditorWindow& window = EditorWindow::getInstance();
-        window.resize(event.window.data1, event.window.data2);
-    }
+    
 }
 
 void Editor_Window_Controller::handle_mouse_motion_event(const SDL_Event& event) {
     // Get the window size
-    const glm::vec<2, int> window_size = sdl_render_handler_->getWindowSize();
-
+    EditorWindow& window = EditorWindow::getInstance();
+    int x, y;
+    SDL_GetMouseState(&x, &y);
     // Check if the mouse is near the window's edge
-    if (constexpr int edge_dist = 10; event.motion.x >= window_size.x - edge_dist || event.motion.y >= window_size.y -
-	    edge_dist)
+    if (x >= window.getPosition().x + window.getSize().x - 5 && x <= window.getPosition().x + window.getSize().x + 5 &&
+        y >= window.getPosition().y + window.getSize().y - 5 && y <= window.getPosition().y + window.getSize().y + 5)
     {
         SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZENWSE));
-        if (isResizing) {
-            resize_window(event);
-        }
     }
     else {
         SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
     }
 
+    if (isResizing) {
+        resize_window(event);
+    }
+    
 }
 
 void Editor_Window_Controller::handle_mouse_button_down_event(const SDL_Event& event) {
     if (event.button.button == SDL_BUTTON_LEFT) {
         // Start resizing when the mouse button is pressed down
-        if (const glm::vec<2, int> window_size = sdl_render_handler_->getWindowSize(); event.button.x >= window_size.x -
-	        10 || event.button.y >= window_size.y - 10)
+        EditorWindow& window = EditorWindow::getInstance();
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        if (x >= window.getPosition().x + window.getSize().x - 5 && x <= window.getPosition().x + window.getSize().x + 5 &&
+            y >= window.getPosition().y + window.getSize().y - 5 && y <= window.getPosition().y + window.getSize().y + 5)
         {
-            start_resizing(event);
+            isResizing = true;
         }
 
     }
+    else if (event.button.button == SDL_BUTTON_RIGHT) {
+        
+    }
+
+
 }
 
 void Editor_Window_Controller::handle_mouse_button_up_event(const SDL_Event& event) {
     if (event.button.button == SDL_BUTTON_LEFT) {
         // Stop resizing when the mouse button is released
-        stop_resizing();
+        isResizing = false;
     }
 }
 
 void Editor_Window_Controller::resize_window(const SDL_Event& event) {
     EditorWindow& window = EditorWindow::getInstance();
-    const glm::vec<2, int> window_size = sdl_render_handler_->getWindowSize();
-    const int new_width = window_size.x + (event.motion.x - resizeStartPos.x);
-    const int new_height = window_size.y + (event.motion.y - resizeStartPos.y);
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+    const int new_width = x - window.getPosition().x;
+    const int new_height = y - window.getPosition().y;
     window.resize(new_width, new_height);
-    resizeStartPos = { event.motion.x, event.motion.y };
-}
-
-void Editor_Window_Controller::start_resizing(const SDL_Event& event) {
-    isResizing = true;
-    resizeStartPos = { event.button.x, event.button.y };
-}
-
-void Editor_Window_Controller::stop_resizing() {
-    isResizing = false;
 }
 

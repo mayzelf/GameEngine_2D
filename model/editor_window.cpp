@@ -111,7 +111,7 @@ void EditorWindow::setTitleBar(const TitleBar& titleBar)
 	this->titleBar = titleBar;
 }
 
-const TitleBar& EditorWindow::getTitleBar() const
+TitleBar& EditorWindow::getTitleBar()
 {
 	return titleBar;
 }
