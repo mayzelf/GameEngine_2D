@@ -29,6 +29,11 @@ void TitleBar::set_dropdowns(const std::vector<Dropdown>& dropdowns)
     m_dropdowns = dropdowns;
 }
 
+void TitleBar::set_size(int width, int height)
+{
+	size = glm::vec<2, int>(width, height);
+}
+
 // Getters
 int TitleBar::get_icon_path() const
 {
@@ -48,4 +53,9 @@ int TitleBar::get_flags() const
 std::vector<Dropdown> TitleBar::get_dropdowns() const
 {
     return m_dropdowns;
+}
+
+glm::vec<2, int> TitleBar::get_size() const
+{
+	return size;
 }

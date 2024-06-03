@@ -36,12 +36,14 @@ public:
     void set_title(const std::string& title);
     void set_flags(int flags);
     void set_dropdowns(const std::vector<Dropdown>& dropdowns);
+    void set_size(int width, int height);
 
     // Getters
     int get_icon_path() const;
     std::string get_title() const;
     int get_flags() const;
     std::vector<Dropdown> get_dropdowns() const;
+    glm::vec<2, int> get_size() const;
 
 private:
     int m_iconPath;
@@ -58,7 +60,7 @@ public:
     TitleBarBuilder& set_flags(int flags) { m_flags_ = flags; return *this; }
     TitleBarBuilder& set_dropdowns(const std::vector<Dropdown>& dropdowns) { m_dropdowns_ = dropdowns; return *this; }
     TitleBarBuilder& set_title(const std::string& title) { m_title_ = title; return *this; }
-    TitleBarBuilder& set_size(const glm::vec<2, int>& size) { size_ = size; return *this; }
+    TitleBarBuilder& set_size(int width, int height) { size_.x = width; size_.y = height; return *this; }
 
     [[nodiscard]] TitleBar build() const { return TitleBar(m_icon_, m_flags_, m_dropdowns_, m_title_ , size_); }
 

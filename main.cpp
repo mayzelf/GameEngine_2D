@@ -23,6 +23,7 @@ int CALLBACK WinMain(
             .set_icon_path(IDB_PNG1)
             .set_flags(SHOW_MINIMIZE_BUTTON | SHOW_CLOSE_BUTTON | SHOW_MAXIMIZE_BUTTON)
             .set_title("Maygine")
+            .set_size(-1, 36)
             .build())
         .build();
 
